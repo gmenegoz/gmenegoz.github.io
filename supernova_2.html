@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supernove: Distanza di Sicurezza?</title>
+    <!-- Tailwind CSS per styling rapido e moderno -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #050510;
+            background-image: radial-gradient(circle at 50% 50%, #1a1a40 0%, #000000 100%);
+            overflow: hidden; /* Previene scroll su touch screen */
+        }
+
+        /* Effetto vetro per i pannelli */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        /* Animazioni */
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Pulsanti custom */
+        .nav-btn {
+            transition: all 0.2s;
+        }
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Indicatore di pericolo dinamico */
+        .danger-bar-container {
+            width: 100%;
+            height: 10px;
+            background: #333;
+            border-radius: 5px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        .danger-bar-fill {
+            height: 100%;
+            transition: width 0.5s ease, background-color 0.5s ease;
+        }
+    </style>
+</head>
+<body class="text-white h-screen w-screen flex flex-col justify-between p-4 select-none">
+
+    <!-- Header Fisso -->
+    <header class="flex justify-between items-center px-8 py-4 z-50">
+        <div class="text-gray-400 text-xl" id="slide-counter">1 / 10</div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow relative w-full max-w-7xl mx-auto flex items-center justify-center">
+        
+        <!-- Slide 0: Intro -->
+        <section class="slide absolute inset-0 flex flex-col items-center justify-center text-center px-4" id="slide-0">
+            <h1 class="text-6xl md:text-8xl font-black text-yellow-400 mb-6 drop-shadow-[0_0_15px_rgba(255,215,0,0.5)]">
+                Supernove
+            </h1>
+            <h2 class="text-3xl md:text-4xl text-blue-300 mb-12 font-light">
+                Quanto vicino è "troppo vicino"?
+            </h2>
+            <div class="glass-panel p-8 rounded-2xl max-w-4xl text-xl md:text-2xl leading-relaxed mb-12">
+                <p class="mb-6">
+                    Una supernova è l'evento più violento che possa accadere a una stella. 
+                    <br>Ma cosa succederebbe se ne esplodesse una vicino a noi?
+                </p>
+                <p>
+                    Esploriamo l'universo avvicinandoci progressivamente alla Terra.
+                    <br>Analizzeremo due fattori chiave:
+                </p>
+                <div class="flex justify-center gap-12 mt-8 font-bold">
+                    <div class="flex items-center gap-3 text-yellow-300">
+                        <span class="text-4xl">☀️</span> Luminosità
+                    </div>
+                    <div class="flex items-center gap-3 text-red-400">
+                        <span class="text-4xl">☢️</span> Radiazioni
+                    </div>
+                </div>
+            </div>
+	    <div>
+	    ⚠️ <strong>Attenzione:</strong> Le supernove non sono tutte uguali e i loro effetti non dipendono solo dalla distanza ma anche dalla massa e dalla composizione della stella: abbiamo cercato di semplificare una grande variabilità di fenomeni.
+
+	    </div>
+            <button onclick="nextSlide()" class="bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-500 hover:to-blue-700 text-white font-bold py-6 px-12 rounded-full text-3xl shadow-lg transform transition hover:scale-105 border border-blue-400">
+                INIZIA IL VIAGGIO 🚀
+            </button>
+        </section>
+
+        <!-- Template per le slide delle stelle (popolato via JS) -->
+        <div id="dynamic-slide-container" class="w-full h-full hidden">
+            <!-- Il contenuto verrà iniettato qui -->
+        </div>
+
+        <!-- Slide Finale -->
+        <section class="slide hidden absolute inset-0 flex flex-col items-center justify-center text-center px-4" id="slide-final">
+            <h1 class="text-6xl font-black text-green-400 mb-8">Niente panico! 🌍</h1>
+            <div class="glass-panel p-10 rounded-3xl max-w-5xl text-2xl leading-relaxed space-y-6">
+                <p>
+                    Non ci sono stelle abbastanza massicce (o nane bianche vicine alla massa critica) nel raggio di "zona letale" (circa 50-100 anni luce) dalla Terra.
+                </p>
+                <p>
+                    Le candidate supernove più vicine, come <strong>IK Pegasi</strong> (150 a.l.) o <strong>Betelgeuse</strong> (640 a.l.), sono abbastanza lontane da regalarci solo uno spettacolo di luci incredibile, senza ucciderci con le radiazioni.
+                </p>
+                <p class="text-yellow-300 font-bold mt-8 text-3xl">
+                    Possiamo stare tranquilli... per i prossimi milioni di anni.
+                </p>
+            </div>
+            <button onclick="restart()" class="mt-12 bg-white text-black font-bold py-4 px-10 rounded-full text-2xl hover:bg-gray-200 transition">
+                🔄 Ricomincia da capo
+            </button>
+        </section>
+
+    </main>
+
+    <!-- Navigation Bar (Fixed Bottom) -->
+    <footer class="h-32 flex items-center justify-between px-8 pb-4 w-full max-w-7xl mx-auto z-50">
+        <button onclick="prevSlide()" id="btn-prev" class="nav-btn glass-panel text-white px-8 py-4 rounded-xl text-2xl font-bold flex items-center gap-4 opacity-50 cursor-not-allowed" disabled>
+            <span>◀</span> Indietro
+        </button>
+
+        <!-- Indicatore Visuale del Pericolo -->
+        <div class="flex-grow mx-12 hidden" id="danger-meter">
+            <div class="flex justify-between text-sm text-gray-400 uppercase tracking-wider mb-2 font-bold">
+                <span>Distanza Sicura</span>
+                <span>Zona Letale</span>
+            </div>
+            <div class="w-full h-4 bg-gray-800 rounded-full overflow-hidden border border-gray-700">
+                <div id="danger-fill" class="h-full bg-green-500 w-0 transition-all duration-1000"></div>
+            </div>
+            <div class="text-center mt-2 text-xl font-mono text-blue-300" id="distance-display"></div>
+        </div>
+
+        <button onclick="nextSlide()" id="btn-next" class="nav-btn bg-yellow-500 text-black px-8 py-4 rounded-xl text-2xl font-bold flex items-center gap-4 hover:bg-yellow-400 shadow-[0_0_20px_rgba(255,215,0,0.3)]">
+            Avanti <span>▶</span>
+        </button>
+    </footer>
+
+    <script>
+        // Dati delle slide
+        const stars = [
+            {
+                name: "Galassia di Andromeda",
+                dist: "2.5 Milioni a.l.",
+                distVal: 2500000,
+                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Andromeda_Galaxy_%28with_h-alpha%29.jpg/800px-Andromeda_Galaxy_%28with_h-alpha%29.jpg",
+                desc: "La galassia più vicina a noi. Una supernova qui è un puntino debole.",
+                light: "Visibile solo con binocoli o telescopi (o appena a occhio nudo in cieli perfetti).",
+                rad: "Nessun effetto.",
+                dangerLevel: 5, // 0-100
+                color: "bg-green-500"
+            },
+            {
+                name: "Eta Carinae",
+                dist: "7,500 a.l.",
+                distVal: 7500,
+                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Eta_Carinae.jpg/800px-Eta_Carinae.jpg",
+                desc: "Una stella enorme: 100 volte il Sole, darebbe origine ad un'ipernova",
+                light: "Visibile in pieno giorno. Più luminosa di Venere. Proietterebbe ombre di notte.",
+                rad: "Sicuri. L'atmosfera assorbe tutto. Improbabile un rischio diretto per noi.",
+                dangerLevel: 15,
+                color: "bg-green-400"
+            },
+            {
+                name: "Betelgeuse",
+                dist: "~640 a.l.",
+                distVal: 640,
+                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Betelgeuse_(star).jpg/600px-Betelgeuse_(star).jpg",
+                desc: "La spalla di Orione. Una gigante rossa enorme pronta a esplodere (fra alcune centinaia di migliaia di anni).",
+                light: "Spettacolare. Luminosa come la Mezza Luna. Visibile di giorno per mesi.",
+                rad: "Nessun pericolo per la vita. Grande festa per gli astronomi.",
+                dangerLevel: 25,
+                color: "bg-yellow-400"
+            },
+            {
+                name: "Spica",
+                dist: "250 a.l.",
+                distVal: 250,
+                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Spica_DSS.png/600px-Spica_DSS.png",
+                desc: "La stella più brillante della Vergine. Un sistema binario massiccio formato da due stelle azzurre.",
+                light: "Brillantissima, visibile di giorno. Illuminerebbe le notti a giorno.",
+                rad: "Radiazioni rilevabili dagli strumenti, ma schermate da atmosfera e magnetosfera.",
+                dangerLevel: 40,
+                color: "bg-yellow-500"
+            },
+            {
+                name: "IK Pegasi",
+                dist: "154 a.l.",
+                distVal: 154,
+                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Artist%E2%80%99s_impression_of_a_vampire_star_and_its_victim.jpg/800px-Artist%E2%80%99s_impression_of_a_vampire_star_and_its_victim.jpg", // Artist impression
+                desc: "Un sistema binario in cui una stella nana bianca sta rubando materia alla compagna. Crescerà fino ad esplodere",
+                light: "Potenzialmente superiore alla Luna Piena.",
+                rad: "Inizio dei problemi. Danni misurabili allo strato di ozono. Rischio aumentato di radiazioni UV al suolo e conseguente incremento di tumori.",
+                dangerLevel: 60,
+                color: "bg-orange-500"
+            },
+            {
+                name: "Wolf 1130",
+                dist: "54 a.l.",
+                distVal: 54,
+                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Sirius_A_and_B_artwork.jpg/800px-Sirius_A_and_B_artwork.jpg", // Generic Binary
+                desc: "Un'esplosione a questa distanza avrebbe effetti climatici importanti ma difficili da prevedere. Potrebbe addirittura innescare un'era glaciale",
+                light: "Intermedia tra la Luna piena e il Sole.",
+                rad: "Danni gravi allo strato di ozonoiozono. Mutazioni biologiche diffuse. Cambiamenti climatici.",
+                dangerLevel: 80,
+                color: "bg-red-500"
+            },
+            {
+                name: "Distanza di Vega",
+                dist: "25 a.l.",
+                distVal: 25,
+                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Vega_-_star_in_Lyra.png/800px-Vega_-_star_in_Lyra.jpg",
+                desc: "Vega è troppo piccola per esplodere, ma se una stella esplodesse a quella distanza...",
+                light: "Migliaia di volte la Luna piena. Ustioni alla retina se guardata fissa.",
+                rad: "Distruzione dello strato di ozono. Estinzione di massa probabile.",
+                dangerLevel: 95,
+                color: "bg-red-600"
+            },
+            {
+                name: "Distanza di Alpha Centauri",
+                dist: "4 a.l.",
+                distVal: 4,
+                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/The_sky_around_Alpha_Centauri_and_Proxima_Centauri_%28eso1629i%29.jpg/800px-The_sky_around_Alpha_Centauri_and_Proxima_Centauri_%28eso1629i%29.jpg",
+                desc: "La stella più vicina a noi oltre al Sole. Troppo piccola per esplodere, ma se ci fosse una supernova a quella distanza...",
+                light: "Luminosa come il Sole.",
+                rad: "L'atmosfera verrebbe spazzata via o ionizzata. Probabilmente sopravviverebbero solo alcune specie nel sottosuolo o nelle profondità oceaniche.",
+                dangerLevel: 100,
+                color: "bg-red-700"
+            }
+        ];
+
+        let currentSlide = 0; // 0 = Intro, 1..8 = Stelle, 9 = Finale
+
+        const container = document.getElementById('dynamic-slide-container');
+        const introSlide = document.getElementById('slide-0');
+        const finalSlide = document.getElementById('slide-final');
+        const btnNext = document.getElementById('btn-next');
+        const btnPrev = document.getElementById('btn-prev');
+        const counter = document.getElementById('slide-counter');
+        const dangerMeter = document.getElementById('danger-meter');
+        const dangerFill = document.getElementById('danger-fill');
+        const distDisplay = document.getElementById('distance-display');
+
+        function updateUI() {
+            // Gestione Visibilità Slide
+            introSlide.style.display = currentSlide === 0 ? 'flex' : 'none';
+            finalSlide.style.display = currentSlide === stars.length + 1 ? 'flex' : 'none';
+            
+            if (currentSlide > 0 && currentSlide <= stars.length) {
+                container.style.display = 'block';
+                dangerMeter.style.display = 'block';
+                renderStarSlide(currentSlide - 1);
+            } else {
+                container.style.display = 'none';
+                dangerMeter.style.display = 'none';
+            }
+
+            // Pulsanti
+            if (currentSlide === 0) {
+                btnPrev.disabled = true;
+                btnPrev.classList.add('opacity-50', 'cursor-not-allowed');
+                btnNext.style.visibility = 'hidden'; // Nascondi next in intro, c'è il bottone gigante
+            } else {
+                btnPrev.disabled = false;
+                btnPrev.classList.remove('opacity-50', 'cursor-not-allowed');
+                btnNext.style.visibility = 'visible';
+            }
+
+            if (currentSlide === stars.length + 1) {
+                btnNext.style.display = 'none';
+            } else {
+                btnNext.style.display = 'flex';
+            }
+
+            // Counter
+            counter.innerText = currentSlide === 0 ? "" : 
+                                currentSlide > stars.length ? "Fine" : 
+                                `${currentSlide} / ${stars.length}`;
+        }
+
+        function renderStarSlide(index) {
+            const data = stars[index];
+            
+            // Aggiorna Danger Bar
+            dangerFill.style.width = `${data.dangerLevel}%`;
+            dangerFill.className = `h-full transition-all duration-1000 ${data.color}`;
+            distDisplay.innerText = data.dist;
+
+            // Template HTML
+            container.innerHTML = `
+                <div class="fade-in w-full h-full flex flex-row items-center justify-between px-8 gap-8">
+                    
+                    <!-- Colonna Info -->
+                    <div class="w-1/2 flex flex-col justify-center space-y-6">
+                        <h2 class="text-6xl font-bold text-yellow-400 mb-2">${data.name}</h2>
+                        <div class="text-3xl text-blue-300 font-mono mb-6">📍 Distanza: ${data.dist}</div>
+                        
+                        <div class="glass-panel p-8 rounded-2xl">
+                            <p class="text-2xl mb-6 leading-relaxed">${data.desc}</p>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-4">
+                                    <span class="text-4xl">☀️</span>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-yellow-200">Luminosità</h3>
+                                        <p class="text-lg text-gray-200">${data.light}</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <span class="text-4xl">☢️</span>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-red-300">Radiazioni</h3>
+                                        <p class="text-lg text-gray-200">${data.rad}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Colonna Visual -->
+                    <div class="w-1/2 flex flex-col items-center justify-center relative">
+                        <!-- Immagine Stella -->
+                        <div class="relative w-[500px] h-[500px] rounded-full overflow-hidden border-4 border-white/20 shadow-[0_0_100px_rgba(255,255,255,0.2)]">
+                            <img src="${data.img}" alt="${data.name}" class="w-full h-full object-cover">
+                            <!-- Overlay se pericoloso -->
+                            <div class="absolute inset-0 bg-red-500 mix-blend-overlay opacity-${data.dangerLevel > 50 ? '30' : '0'}"></div>
+                        </div>
+                        <p class="mt-4 text-gray-500 text-sm">Credits: Wikimedia Commons</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function nextSlide() {
+            if (currentSlide < stars.length + 1) {
+                currentSlide++;
+                updateUI();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateUI();
+            }
+        }
+
+        function restart() {
+            currentSlide = 0;
+            updateUI();
+        }
+
+        // Keyboard nav
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // Init
+        updateUI();
+
+    </script>
+</body>
+</html>
