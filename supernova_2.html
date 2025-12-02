@@ -157,6 +157,7 @@
         const stars = [
             {
                 name: "Galassia di Andromeda",
+		constellation: "Andromeda",
                 dist: "2.5 Milioni a.l.",
                 distVal: 2500000,
                 img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Andromeda_Galaxy_%28with_h-alpha%29.jpg/800px-Andromeda_Galaxy_%28with_h-alpha%29.jpg",
@@ -168,6 +169,7 @@
             },
             {
                 name: "Eta Carinae",
+		constellation: "Carena",
                 dist: "7,500 a.l.",
                 distVal: 7500,
                 img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Eta_Carinae.jpg/800px-Eta_Carinae.jpg",
@@ -179,17 +181,19 @@
             },
             {
                 name: "Betelgeuse",
-                dist: "~640 a.l.",
+		constellation: "Orione",
+                dist: "640 a.l.",
                 distVal: 640,
                 img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Betelgeuse_(star).jpg/600px-Betelgeuse_(star).jpg",
-                desc: "La spalla di Orione. Una gigante rossa enorme pronta a esplodere (fra alcune centinaia di migliaia di anni).",
+                desc: "Una gigante rossa enorme pronta a esplodere (fra alcune centinaia di migliaia di anni).",
                 light: "Spettacolare. Luminosa come la Mezza Luna. Visibile di giorno per mesi.",
                 rad: "Nessun pericolo per la vita. Grande festa per gli astronomi.",
                 dangerLevel: 25,
                 color: "bg-yellow-400"
             },
             {
-                name: "Spica",
+                name: "Spica",	
+		constellation: "Vergine", 
                 dist: "250 a.l.",
                 distVal: 250,
                 img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Spica_DSS.png/600px-Spica_DSS.png",
@@ -201,6 +205,7 @@
             },
             {
                 name: "IK Pegasi",
+		constellation: "Pegaso", 
                 dist: "154 a.l.",
                 distVal: 154,
                 img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Artist%E2%80%99s_impression_of_a_vampire_star_and_its_victim.jpg/800px-Artist%E2%80%99s_impression_of_a_vampire_star_and_its_victim.jpg", // Artist impression
@@ -212,28 +217,31 @@
             },
             {
                 name: "Wolf 1130",
+		constellation: "Cigno",
                 dist: "54 a.l.",
                 distVal: 54,
                 img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Sirius_A_and_B_artwork.jpg/800px-Sirius_A_and_B_artwork.jpg", // Generic Binary
-                desc: "Un'esplosione a questa distanza avrebbe effetti climatici importanti ma difficili da prevedere. Potrebbe addirittura innescare un'era glaciale",
+                desc: "Un'esplosione a questa distanza avrebbe effetti climatici importanti ma difficili da prevedere.",
                 light: "Intermedia tra la Luna piena e il Sole.",
                 rad: "Danni gravi allo strato di ozono. Mutazioni biologiche diffuse. Cambiamenti climatici.",
                 dangerLevel: 80,
                 color: "bg-red-500"
             },
             {
-                name: "Distanza di Vega",
+                name: "Vega",
+		constellation: "Lira", 
                 dist: "25 a.l.",
                 distVal: 25,
                 img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Vega_-_star_in_Lyra.png/800px-Vega_-_star_in_Lyra.jpg",
-                desc: "Vega è troppo piccola per esplodere, ma se una stella esplodesse a quella distanza...",
+                desc: "Vega è troppo piccola per esplodere, ma se una stella esplodesse a quella distanza:",
                 light: "Migliaia di volte la Luna piena. Ustioni alla retina se guardata fissa.",
-                rad: "Distruzione dello strato di ozono. Estinzione di massa probabile.",
+                rad: "Distruzione dello strato di ozono. Probabili estinzioni di massa.",
                 dangerLevel: 95,
                 color: "bg-red-600"
             },
             {
-                name: "Distanza di Alpha Centauri",
+                name: "Alpha Centauri",
+		constellation: "Centauro",
                 dist: "4 a.l.",
                 distVal: 4,
                 img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/The_sky_around_Alpha_Centauri_and_Proxima_Centauri_%28eso1629i%29.jpg/800px-The_sky_around_Alpha_Centauri_and_Proxima_Centauri_%28eso1629i%29.jpg",
@@ -309,6 +317,7 @@
                     <!-- Colonna Info -->
                     <div class="w-1/2 flex flex-col justify-center space-y-6">
                         <h2 class="text-6xl font-bold text-yellow-400 mb-2">${data.name}</h2>
+			<h3 class="text-3xl text-yellow-400 mb-2">(${data.constellation})</h3>
                         <div class="text-3xl text-blue-300 font-mono mb-6">📍 Distanza: ${data.dist}</div>
                         
                         <div class="glass-panel p-8 rounded-2xl">
