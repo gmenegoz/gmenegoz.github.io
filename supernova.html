@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>Supernove: Distanza di Sicurezza?</title>
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS per styling rapido e moderno -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Google -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
@@ -13,10 +13,7 @@
             font-family: 'Montserrat', sans-serif;
             background-color: #050510;
             background-image: radial-gradient(circle at 50% 50%, #1a1a40 0%, #000000 100%);
-            /* Importante per l'iframe: disabilita scrollbar che potrebbero apparire per errore */
-            overflow: hidden; 
-            width: 100%;
-            height: 100%;
+            overflow: hidden; /* Previene scroll su touch screen */
         }
 
         /* Effetto vetro per i pannelli */
@@ -25,7 +22,7 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.37);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
         /* Animazioni */
@@ -46,31 +43,41 @@
             transform: scale(0.95);
         }
 
-        /* Testo più leggibile su sfondi scuri */
-        .text-shadow {
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        /* Indicatore di pericolo dinamico */
+        .danger-bar-container {
+            width: 100%;
+            height: 10px;
+            background: #333;
+            border-radius: 5px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        .danger-bar-fill {
+            height: 100%;
+            transition: width 0.5s ease, background-color 0.5s ease;
         }
     </style>
 </head>
-<body class="text-white flex flex-col justify-between select-none">
+<body class="text-white h-screen w-screen flex flex-col justify-between p-4 select-none">
 
-    <!-- Header Fisso (Ridotto padding) -->
-    <header class="flex justify-between items-center px-6 py-3 z-50 h-12 shrink-0">
-        <div class="text-gray-400 text-sm md:text-base uppercase tracking-widest">Astrofisica</div>
-        <div class="text-gray-400 text-sm md:text-base" id="slide-counter">1 / 10</div>
+    <!-- Header Fisso -->
+    <header class="flex justify-between items-center px-8 py-4 z-50">
+        <div class="text-gray-400 text-xl" id="slide-counter">1 / 10</div>
     </header>
 
     <!-- Main Content Area -->
-    <main style="height: 500px" class="flex-grow relative w-full px-4 flex items-center justify-center overflow-hidden">
+    <main class="flex-grow relative w-full max-w-7xl mx-auto flex items-center justify-center">
         
         <!-- Slide 0: Intro -->
         <section class="slide absolute inset-0 flex flex-col items-center justify-center text-center px-4" id="slide-0">
-            <h2 class="text-3xl font-light text-blue-300 mb-6">
+        <!--    <h1 class="text-6xl md:text-8xl font-black text-yellow-400 mb-6 drop-shadow-[0_0_15px_rgba(255,215,0,0.5)]">
+                Supernove
+	</h1> -->
+            <h2 class="text-3xl md:text-4xl text-blue-300 mb-12 font-light">
                 Quanto vicino è "troppo vicino"?
             </h2>
-            <!-- Ridotto padding e font size del pannello intro -->
-            <div class="glass-panel p-6 rounded-2xl max-w-3xl text-lg leading-relaxed mb-8 shadow-xl">
-                <p class="mb-4">
+            <div class="glass-panel p-8 rounded-2xl max-w-4xl text-xl md:text-2xl leading-relaxed mb-12">
+                <p class="mb-6">
                     Una supernova è l'evento più violento che possa accadere a una stella. 
                     <br>Ma cosa succederebbe se ne esplodesse una vicino a noi?
                 </p>
@@ -78,21 +85,20 @@
                     Esploriamo l'universo avvicinandoci progressivamente alla Terra.
                     <br>Analizzeremo due fattori chiave:
                 </p>
-                <div class="flex justify-center gap-8 mt-6 font-bold text-base">
-                    <div class="flex items-center gap-2 text-yellow-300">
-                        <span class="text-2xl">☀️</span> Luminosità
+                <div class="flex justify-center gap-12 mt-8 font-bold">
+                    <div class="flex items-center gap-3 text-yellow-300">
+                        <span class="text-4xl">☀️</span> Luminosità
                     </div>
-                    <div class="flex items-center gap-2 text-red-400">
-                        <span class="text-2xl">☢️</span> Radiazioni
+                    <div class="flex items-center gap-3 text-red-400">
+                        <span class="text-4xl">☢️</span> Radiazioni
                     </div>
                 </div>
             </div>
-            
-            <div class="max-w-3xl text-sm text-gray-400 mb-6 px-4">
-               ⚠️ <strong>Attenzione:</strong> Le supernove non sono tutte uguali e i loro effetti non dipendono solo dalla distanza ma anche dalla massa e dalla composizione della stella: abbiamo cercato di semplificare una grande variabilità di fenomeni.
-            </div>
+	    <div>
+	    ⚠️ <strong>Attenzione:</strong> Le supernove non sono tutte uguali e i loro effetti non dipendono solo dalla distanza ma anche dalla massa e dalla composizione della stella: abbiamo cercato di semplificare una grande variabilità di fenomeni.
 
-            <button onclick="nextSlide()" class="bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-500 hover:to-blue-700 text-white font-bold py-3 px-8 rounded-full text-xl shadow-lg transform transition hover:scale-105 border border-blue-400">
+	    </div>
+            <button onclick="nextSlide()" class="bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-500 hover:to-blue-700 text-white font-bold py-6 px-12 rounded-full text-3xl shadow-lg transform transition hover:scale-105 border border-blue-400">
                 INIZIA IL VIAGGIO 🚀
             </button>
         </section>
@@ -104,54 +110,54 @@
 
         <!-- Slide Finale -->
         <section class="slide hidden absolute inset-0 flex flex-col items-center justify-center text-center px-4" id="slide-final">
-            <h1 class="text-5xl font-black text-green-400 mb-6">Niente panico! 🌍</h1>
-            <div class="glass-panel p-8 rounded-3xl max-w-4xl text-lg leading-relaxed space-y-4">
+            <h1 class="text-6xl font-black text-green-400 mb-8">Niente panico! 🌍</h1>
+            <div class="glass-panel p-10 rounded-3xl max-w-5xl text-2xl leading-relaxed space-y-6">
                 <p>
                     Non ci sono stelle abbastanza massicce (o nane bianche vicine alla massa critica) nel raggio di "zona letale" (circa 50-100 anni luce) dalla Terra.
                 </p>
                 <p>
                     Le candidate supernove più vicine, come <strong>IK Pegasi</strong> (150 a.l.) o <strong>Betelgeuse</strong> (640 a.l.), sono abbastanza lontane da regalarci solo uno spettacolo di luci incredibile, senza ucciderci con le radiazioni.
                 </p>
-                <p class="text-yellow-300 font-bold mt-6 text-2xl">
+                <p class="text-yellow-300 font-bold mt-8 text-3xl">
                     Possiamo stare tranquilli... per i prossimi milioni di anni.
                 </p>
             </div>
-            <button onclick="restart()" class="mt-8 bg-white text-black font-bold py-3 px-8 rounded-full text-xl hover:bg-gray-200 transition">
+            <button onclick="restart()" class="mt-12 bg-white text-black font-bold py-4 px-10 rounded-full text-2xl hover:bg-gray-200 transition">
                 🔄 Ricomincia da capo
             </button>
         </section>
 
     </main>
 
-    <!-- Navigation Bar (Altezza ridotta per salvare spazio verticale) -->
-    <footer class="h-20 shrink-0 flex items-center justify-between px-6 w-full z-50 mb-2">
-        <button onclick="prevSlide()" id="btn-prev" class="nav-btn glass-panel text-white px-5 py-2 rounded-xl text-lg font-bold flex items-center gap-2 opacity-50 cursor-not-allowed border border-gray-600" disabled>
+    <!-- Navigation Bar (Fixed Bottom) -->
+    <footer class="h-32 flex items-center justify-between px-8 pb-4 w-full max-w-7xl mx-auto z-50">
+        <button onclick="prevSlide()" id="btn-prev" class="nav-btn glass-panel text-white px-8 py-4 rounded-xl text-2xl font-bold flex items-center gap-4 opacity-50 cursor-not-allowed" disabled>
             <span>◀</span> Indietro
         </button>
 
         <!-- Indicatore Visuale del Pericolo -->
-        <div class="flex-grow mx-8 hidden" id="danger-meter">
-            <div class="flex justify-between text-xs text-gray-400 uppercase tracking-wider mb-1 font-bold">
+        <div class="flex-grow mx-12 hidden" id="danger-meter">
+            <div class="flex justify-between text-sm text-gray-400 uppercase tracking-wider mb-2 font-bold">
                 <span>Distanza Sicura</span>
                 <span>Zona Letale</span>
             </div>
-            <div class="w-full h-3 bg-gray-800 rounded-full overflow-hidden border border-gray-700">
+            <div class="w-full h-4 bg-gray-800 rounded-full overflow-hidden border border-gray-700">
                 <div id="danger-fill" class="h-full bg-green-500 w-0 transition-all duration-1000"></div>
             </div>
-            <div class="text-center mt-1 text-lg font-mono text-blue-300 font-bold" id="distance-display"></div>
+            <div class="text-center mt-2 text-xl font-mono text-blue-300" id="distance-display"></div>
         </div>
 
-        <button onclick="nextSlide()" id="btn-next" class="nav-btn bg-yellow-500 text-black px-5 py-2 rounded-xl text-lg font-bold flex items-center gap-2 hover:bg-yellow-400 shadow-[0_0_15px_rgba(255,215,0,0.3)]">
+        <button onclick="nextSlide()" id="btn-next" class="nav-btn bg-yellow-500 text-black px-8 py-4 rounded-xl text-2xl font-bold flex items-center gap-4 hover:bg-yellow-400 shadow-[0_0_20px_rgba(255,215,0,0.3)]">
             Avanti <span>▶</span>
         </button>
     </footer>
 
     <script>
-        // Dati delle slide (Invariati)
+        // Dati delle slide
         const stars = [
             {
                 name: "Galassia di Andromeda",
-                constellation: "Andromeda",
+		constellation: "Andromeda",
                 dist: "2.5 Milioni a.l.",
                 distVal: 2500000,
                 img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Andromeda_Galaxy_%28with_h-alpha%29.jpg/800px-Andromeda_Galaxy_%28with_h-alpha%29.jpg",
@@ -163,7 +169,7 @@
             },
             {
                 name: "Eta Carinae",
-                constellation: "Carena",
+		constellation: "Carena",
                 dist: "7,500 a.l.",
                 distVal: 7500,
                 img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Eta_Carinae.jpg/800px-Eta_Carinae.jpg",
@@ -175,7 +181,7 @@
             },
             {
                 name: "Betelgeuse",
-                constellation: "Orione",
+		constellation: "Orione",
                 dist: "640 a.l.",
                 distVal: 640,
                 img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Betelgeuse_(star).jpg/600px-Betelgeuse_(star).jpg",
@@ -186,8 +192,8 @@
                 color: "bg-yellow-400"
             },
             {
-                name: "Spica",    
-                constellation: "Vergine", 
+                name: "Spica",	
+		constellation: "Vergine", 
                 dist: "250 a.l.",
                 distVal: 250,
                 img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Spica_DSS.png/600px-Spica_DSS.png",
@@ -199,10 +205,10 @@
             },
             {
                 name: "IK Pegasi",
-                constellation: "Pegaso", 
+		constellation: "Pegaso", 
                 dist: "154 a.l.",
                 distVal: 154,
-                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Artist%E2%80%99s_impression_of_a_vampire_star_and_its_victim.jpg/800px-Artist%E2%80%99s_impression_of_a_vampire_star_and_its_victim.jpg", 
+                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Artist%E2%80%99s_impression_of_a_vampire_star_and_its_victim.jpg/800px-Artist%E2%80%99s_impression_of_a_vampire_star_and_its_victim.jpg", // Artist impression
                 desc: "Un sistema binario in cui una stella nana bianca sta rubando materia alla compagna. Crescerà fino ad esplodere",
                 light: "Potenzialmente superiore alla Luna Piena.",
                 rad: "Inizio dei problemi. Danni misurabili allo strato di ozono. Rischio aumentato di radiazioni UV al suolo e conseguente incremento di tumori.",
@@ -211,10 +217,10 @@
             },
             {
                 name: "Wolf 1130",
-                constellation: "Cigno",
+		constellation: "Cigno",
                 dist: "54 a.l.",
                 distVal: 54,
-                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Sirius_A_and_B_artwork.jpg/800px-Sirius_A_and_B_artwork.jpg", 
+                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Sirius_A_and_B_artwork.jpg/800px-Sirius_A_and_B_artwork.jpg", // Generic Binary
                 desc: "Un'esplosione a questa distanza avrebbe effetti climatici importanti ma difficili da prevedere.",
                 light: "Intermedia tra la Luna piena e il Sole.",
                 rad: "Danni gravi allo strato di ozono. Mutazioni biologiche diffuse. Cambiamenti climatici.",
@@ -223,7 +229,7 @@
             },
             {
                 name: "Vega",
-                constellation: "Lira", 
+		constellation: "Lira", 
                 dist: "25 a.l.",
                 distVal: 25,
                 img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Vega_-_star_in_Lyra.png/800px-Vega_-_star_in_Lyra.jpg",
@@ -235,7 +241,7 @@
             },
             {
                 name: "Alpha Centauri",
-                constellation: "Centauro",
+		constellation: "Centauro",
                 dist: "4 a.l.",
                 distVal: 4,
                 img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/The_sky_around_Alpha_Centauri_and_Proxima_Centauri_%28eso1629i%29.jpg/800px-The_sky_around_Alpha_Centauri_and_Proxima_Centauri_%28eso1629i%29.jpg",
@@ -247,7 +253,8 @@
             }
         ];
 
-        let currentSlide = 0; 
+        let currentSlide = 0; // 0 = Intro, 1..8 = Stelle, 9 = Finale
+
         const container = document.getElementById('dynamic-slide-container');
         const introSlide = document.getElementById('slide-0');
         const finalSlide = document.getElementById('slide-final');
@@ -276,7 +283,7 @@
             if (currentSlide === 0) {
                 btnPrev.disabled = true;
                 btnPrev.classList.add('opacity-50', 'cursor-not-allowed');
-                btnNext.style.visibility = 'hidden'; 
+                btnNext.style.visibility = 'hidden'; // Nascondi next in intro, c'è il bottone gigante
             } else {
                 btnPrev.disabled = false;
                 btnPrev.classList.remove('opacity-50', 'cursor-not-allowed');
@@ -303,36 +310,32 @@
             dangerFill.className = `h-full transition-all duration-1000 ${data.color}`;
             distDisplay.innerText = data.dist;
 
-            // Template HTML adattato per iframe 990x600
-            // Immagini ridotte a 320px
-            // Testi ridotti (text-3xl per titolo, text-base per descrizioni)
+            // Template HTML
             container.innerHTML = `
-                <div class="fade-in w-full h-full flex flex-row items-center justify-between px-4 gap-6">
+                <div class="fade-in w-full h-full flex flex-row items-center justify-between px-8 gap-8">
                     
                     <!-- Colonna Info -->
-                    <div class="w-1/2 flex flex-col justify-center space-y-3">
-                        <div>
-                            <h2 class="text-3xl md:text-4xl font-bold text-yellow-400 leading-tight">${data.name}</h2>
-                            <h3 class="text-xl text-yellow-500/80 mb-1">(${data.constellation})</h3>
-                            <div class="text-xl text-blue-300 font-mono mb-2">📍 Distanza: ${data.dist}</div>
-                        </div>
+                    <div class="w-1/2 flex flex-col justify-center space-y-6">
+                        <h2 class="text-6xl font-bold text-yellow-400 mb-2">${data.name}</h2>
+			<h3 class="text-3xl text-yellow-400 mb-2">(${data.constellation})</h3>
+                        <div class="text-3xl text-blue-300 font-mono mb-6">📍 Distanza: ${data.dist}</div>
                         
-                        <div class="glass-panel p-5 rounded-xl">
-                            <p class="text-base mb-4 leading-normal text-gray-100">${data.desc}</p>
+                        <div class="glass-panel p-8 rounded-2xl">
+                            <p class="text-2xl mb-6 leading-relaxed">${data.desc}</p>
                             
-                            <div class="space-y-3 text-sm">
-                                <div class="flex items-start gap-3">
-                                    <span class="text-2xl">☀️</span>
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-4">
+                                    <span class="text-4xl">☀️</span>
                                     <div>
-                                        <h3 class="text-base font-bold text-yellow-200">Luminosità</h3>
-                                        <p class="text-gray-300 leading-tight">${data.light}</p>
+                                        <h3 class="text-xl font-bold text-yellow-200">Luminosità</h3>
+                                        <p class="text-lg text-gray-200">${data.light}</p>
                                     </div>
                                 </div>
-                                <div class="flex items-start gap-3">
-                                    <span class="text-2xl">☢️</span>
+                                <div class="flex items-start gap-4">
+                                    <span class="text-4xl">☢️</span>
                                     <div>
-                                        <h3 class="text-base font-bold text-red-300">Radiazioni</h3>
-                                        <p class="text-gray-300 leading-tight">${data.rad}</p>
+                                        <h3 class="text-xl font-bold text-red-300">Radiazioni</h3>
+                                        <p class="text-lg text-gray-200">${data.rad}</p>
                                     </div>
                                 </div>
                             </div>
@@ -341,13 +344,13 @@
 
                     <!-- Colonna Visual -->
                     <div class="w-1/2 flex flex-col items-center justify-center relative">
-                        <!-- Immagine Stella (Ridimensionata a 320px per stare nei 600px di altezza con footer) -->
-                        <div class="relative w-[320px] h-[320px] rounded-full overflow-hidden border-4 border-white/20 shadow-[0_0_60px_rgba(255,255,255,0.15)]">
+                        <!-- Immagine Stella -->
+                        <div class="relative w-[500px] h-[500px] rounded-full overflow-hidden border-4 border-white/20 shadow-[0_0_100px_rgba(255,255,255,0.2)]">
                             <img src="${data.img}" alt="${data.name}" class="w-full h-full object-cover">
                             <!-- Overlay se pericoloso -->
                             <div class="absolute inset-0 bg-red-500 mix-blend-overlay opacity-${data.dangerLevel > 50 ? '30' : '0'}"></div>
                         </div>
-                        <p class="mt-2 text-gray-500 text-xs">Credits: Wikimedia Commons</p>
+                        <p class="mt-4 text-gray-500 text-sm">Credits: Wikimedia Commons</p>
                     </div>
                 </div>
             `;
@@ -380,6 +383,7 @@
 
         // Init
         updateUI();
+
     </script>
 </body>
 </html>
