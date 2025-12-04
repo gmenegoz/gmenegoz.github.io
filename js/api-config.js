@@ -7,7 +7,7 @@ const API_CONFIG = {
     // Backend API base URL
     // Development: http://localhost:3000 (when running vercel dev)
     // Production: https://your-vercel-deployment.vercel.app
-    BASE_URL: 'https://astroquiz-backend.vercel.app',
+    BASE_URL: 'http://localhost:3000', // Change this to your Vercel deployment URL
 
     // API Endpoints
     ENDPOINTS: {
@@ -17,6 +17,7 @@ const API_CONFIG = {
         COMPLETE_SESSION: '/api/complete-session',
         ABANDON_SESSION: '/api/abandon-session',
         GET_SCORE_DISTRIBUTION: '/api/get-score-distribution',
+        GET_SCORE_DESCRIPTIONS: '/api/get-score-descriptions',
     },
 
     // Request timeout (ms)
