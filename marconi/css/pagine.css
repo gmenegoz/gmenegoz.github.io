@@ -1,0 +1,72 @@
+/* =====================================================================
+   Layout delle singole pagine, ricalcati su resources/template.pdf
+   (misure in px sul palco 1920×1080).
+   ===================================================================== */
+
+/* ------------------------------- home ------------------------------- */
+.p-home .menu {
+  position: absolute;
+  top: 80px;
+  left: 1313px;
+  width: 423px;
+  display: flex;
+  flex-direction: column;
+  gap: 37px;
+}
+.p-home .voce {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 103px;
+  padding: 10px 20px;
+  border-radius: 26px;
+  background: #000;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: var(--font-titolo);
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 37px;
+  transition: transform 0.12s, background 0.12s;
+}
+.p-home .voce.corta { min-height: 82px; }
+.p-home .voce:active { transform: scale(0.97); background: #333; }
+
+/* ------------------------ 1. L'esigenza di regolamentare ------------------------ */
+.p-regolamentare .testo { left: 154px; top: 295px; width: 640px; }
+.p-regolamentare .img-lucania { left: 946px; top: 208px; width: 842px; height: 663px; }
+
+/* ------------------------ 2. Gli esperimenti sul Philadelphia ------------------------ */
+.p-philadelphia .testo { left: 120px; top: 105px; width: 700px; }
+.p-philadelphia .img-radio { left: 120px; top: 589px; width: 634px; height: 407px; }
+.p-philadelphia .img-nave { left: 884px; top: 341px; width: 950px; height: 655px; }
+
+/* ------------------------ 3. Le crociere sulla Carlo Alberto ------------------------ */
+.p-carlo-alberto .img-illustrazione { left: 112px; top: 81px; width: 387px; height: 420px; }
+.p-carlo-alberto .testo { left: 614px; top: 70px; width: 1190px; }
+.p-carlo-alberto .testo h1 { margin-bottom: 22px; }
+.p-carlo-alberto .img-cartolina { left: 96px; top: 530px; width: 756px; height: 490px; }
+.p-carlo-alberto .img-foto { left: 925px; top: 529px; width: 894px; height: 495px; }
+
+/* ------------------------ 4. Il giornalismo intercontinentale ------------------------ */
+.p-giornalismo .riquadro {
+  left: 828px;
+  top: 72px;
+  width: 705px;
+  height: 948px;
+  padding: 40px 50px;
+  background: rgba(255, 255, 255, 0.78);
+}
+.p-giornalismo .riquadro h1 { margin-bottom: 26px; }
+
+/* ------------------------ 5. La guerra dei cavi ------------------------ */
+.p-guerra-dei-cavi .img-mappa { left: 115px; top: 19px; width: 883px; height: 341px; }
+.p-guerra-dei-cavi .testo { left: 115px; top: 395px; width: 900px; }
+.p-guerra-dei-cavi .testo h1 { margin-bottom: 22px; }
+.p-guerra-dei-cavi .img-great-eastern { left: 1149px; top: 101px; width: 611px; height: 876px; }
+
+/* ------------------------ 6. Il detector magnetico ------------------------ */
+.p-detector .img-detector { left: 81px; top: 230px; width: 935px; height: 660px; }
+.p-detector .testo { left: 1099px; top: 255px; width: 700px; }
