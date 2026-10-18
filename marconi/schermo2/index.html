@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1920, height=1080, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Marconi – S.O.S. un segnale che salva le vite</title>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/pagine.css">
+</head>
+<body>
+<div id="palco">
+
+  <!-- ============================ HOME ============================ -->
+  <section class="vista p-home" id="home">
+    <img class="sfondo" src="img/sfondo.jpg" alt="">
+    <div class="riquadro riquadro-intro">
+      <h1>SOS</h1>
+      <p>Fin da subito molte navi si dotano di sistemi radio a bordo, anche se all’inizio prevalentemente per fini commerciali. Non vi è una vera e propria regolamentazione in merito all’uso della radio legato alla sicurezza dei passeggeri e la concorrenza fra le varie compagnie radiofoniche non aiuta la causa. Saranno tre i naufragi storici ad aprire il dibattito dei governi e dell’opinione pubblica.</p>
+    </div>
+    <nav class="menu">
+      <a class="voce" href="#/republic">Republic - 1909</a>
+      <a class="voce" href="#/titanic">Titanic - 1912</a>
+      <a class="voce" href="#/volturno">Volturno - 1913</a>
+    </nav>
+    <div class="riquadro riquadro-chiusura">
+      <p>A seguito di questi eventi, la Conferenza Radiotelegrafica Internazionale di Londra del giugno 1912 delinea le prime direttive per la sicurezza in mare, mentre il Congresso Americano con il Radio Act del 13 agosto 1912, rafforzerà queste misure. Fra i provvedimenti principali l’obbligo di dotarsi di apparecchiatura radio a bordo e l’ascolto radio continuo 24/24 per l’intercettazione delle richieste di aiuto, l’uso di un segnale globale unico e distinguibile, l’SOS, e la sua priorità assoluta su tutte le altre comunicazioni.</p>
+    </div>
+  </section>
+
+  <!-- ============ APPROFONDIMENTO (riempito da app.js con i dati di contenuti.js) ============ -->
+  <section class="vista p-approfondimento" id="pagina" hidden>
+    <img class="sfondo" src="img/sfondo.jpg" alt="">
+    <div class="velo"></div>
+
+    <div class="colonna-testo">
+      <div class="riquadro-testo">
+        <h1 id="titolo"></h1>
+        <h2 id="data"></h2>
+        <div id="testo"></div>
+      </div>
+    </div>
+
+    <div class="galleria" id="galleria">
+      <div class="cornice"><img id="gal-img" alt=""></div>
+      <div class="gal-contatore" id="gal-contatore"></div>
+    </div>
+    <button class="freccia freccia-prec" id="gal-prec" type="button" aria-label="Immagine precedente">
+      <svg viewBox="0 0 50 100"><path d="M48 2 2 50l46 48"/></svg>
+    </button>
+    <button class="freccia freccia-succ" id="gal-succ" type="button" aria-label="Immagine successiva">
+      <svg viewBox="0 0 50 100"><path d="m2 2 46 48L2 98"/></svg>
+    </button>
+
+    <nav class="barra">
+      <button class="pulsante" id="btn-prec" type="button"><span class="segno">‹</span> <span id="nome-prec"></span></button>
+      <button class="pulsante pulsante-home" id="btn-home" type="button">
+        <svg viewBox="0 0 24 24"><path d="M3.5 11 12 4l8.5 7M6 9.5V20h4.5v-5.5h3V20H18V9.5"/></svg>
+        Home
+      </button>
+      <button class="pulsante" id="btn-succ" type="button"><span id="nome-succ"></span> <span class="segno">›</span></button>
+    </nav>
+  </section>
+
+  <!-- ============================ IMMAGINE INGRANDITA ============================ -->
+  <div class="lightbox" id="lightbox" hidden>
+    <img id="lb-img" alt="">
+    <button class="tasto lb-chiudi" id="lb-chiudi" type="button" aria-label="Chiudi">
+      <svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19"/></svg>
+    </button>
+    <button class="tasto tasto-prec" id="lb-prec" type="button" aria-label="Immagine precedente">
+      <svg viewBox="0 0 24 24"><path d="M15 4 7 12l8 8"/></svg>
+    </button>
+    <button class="tasto tasto-succ" id="lb-succ" type="button" aria-label="Immagine successiva">
+      <svg viewBox="0 0 24 24"><path d="m9 4 8 8-8 8"/></svg>
+    </button>
+    <div class="lb-didascalia" id="lb-didascalia"></div>
+    <div class="lb-contatore" id="lb-contatore"></div>
+  </div>
+
+</div>
+<script src="js/config.js"></script>
+<script src="js/contenuti.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
