@@ -16,7 +16,8 @@
     <img class="sfondo" src="img/sfondo.jpg" alt="">
     <div class="riquadro riquadro-intro">
       <h1>SOS</h1>
-      <p>Fin da subito molte navi si dotano di sistemi radio a bordo, anche se all’inizio prevalentemente per fini commerciali. Non vi è una vera e propria regolamentazione in merito all’uso della radio legato alla sicurezza dei passeggeri e la concorrenza fra le varie compagnie radiofoniche non aiuta la causa. Saranno tre i naufragi storici ad aprire il dibattito dei governi e dell’opinione pubblica.</p>
+      <p class="it">Fin da subito molte navi si dotano di sistemi radio a bordo, anche se all’inizio prevalentemente per fini commerciali. Non vi è una vera e propria regolamentazione in merito all’uso della radio legato alla sicurezza dei passeggeri e la concorrenza fra le varie compagnie radiotelegrafiche non aiuta la causa. Saranno tre i naufragi storici ad aprire il dibattito dei governi e dell’opinione pubblica.</p>
+      <p class="en">From the very beginning, many ships were equipped with onboard radio systems, though initially, these were used primarily for commercial purposes. There were no formal regulations regarding the use of radio for passenger safety, and competition between various radio companies did not help the situation. Three historic shipwrecks would eventually spark a debate among governments and the general public.</p>
     </div>
     <nav class="menu">
       <a class="voce" href="#/republic">Republic - 1909</a>
@@ -24,7 +25,8 @@
       <a class="voce" href="#/volturno">Volturno - 1913</a>
     </nav>
     <div class="riquadro riquadro-chiusura">
-      <p>A seguito di questi eventi, la Conferenza Radiotelegrafica Internazionale di Londra del giugno 1912 delinea le prime direttive per la sicurezza in mare, mentre il Congresso Americano con il Radio Act del 13 agosto 1912, rafforzerà queste misure. Fra i provvedimenti principali l’obbligo di dotarsi di apparecchiatura radio a bordo e l’ascolto radio continuo 24/24 per l’intercettazione delle richieste di aiuto, l’uso di un segnale globale unico e distinguibile, l’SOS, e la sua priorità assoluta su tutte le altre comunicazioni.</p>
+      <p class="it">A seguito di questi eventi, la Conferenza Radiotelegrafica Internazionale di Londra del giugno 1912 delinea le prime direttive per la sicurezza in mare, mentre il Congresso Americano con il Radio Act del 13 agosto 1912 rafforzerà queste misure. Fra i provvedimenti principali l’obbligo di dotarsi di apparecchiatura radio a bordo e l’ascolto radio continuo 24/24 per l’intercettazione delle richieste di aiuto, l’uso di un segnale globale unico e distinguibile, l’SOS, e la sua priorità assoluta su tutte le altre comunicazioni.</p>
+      <p class="en">Following these events, the International Radiotelegraph Conference held in London in June 1912 outlined the first directives for safety at sea, while the U.S. Congress, through the Radio Act of August 13, 1912, further strengthened these measures. Key provisions included the mandatory installation of radio equipment on board, a requirement for continuous 24-hour radio monitoring to intercept distress calls, the adoption of a unique and easily recognizable global distress signal—SOS—and the granting of absolute priority to such signals over all other communications.</p>
     </div>
   </section>
 
@@ -44,6 +46,7 @@
     <div class="galleria" id="galleria">
       <div class="cornice"><img id="gal-img" alt=""></div>
       <div class="gal-contatore" id="gal-contatore"></div>
+      <div class="gal-didascalia" id="gal-didascalia"></div>
     </div>
     <button class="freccia freccia-prec" id="gal-prec" type="button" aria-label="Immagine precedente">
       <svg viewBox="0 0 50 100"><path d="M48 2 2 50l46 48"/></svg>
@@ -61,6 +64,11 @@
       <button class="pulsante" id="btn-succ" type="button"><span id="nome-succ"></span> <span class="segno">›</span></button>
     </nav>
   </section>
+
+  <!-- ============ lingua: la bandiera mostra la lingua in cui si passa ============ -->
+  <button class="lingua" id="btn-lingua" type="button" aria-label="English">
+    <img id="img-lingua" src="img/lingua-en.png" alt="">
+  </button>
 
   <!-- ============================ IMMAGINE INGRANDITA ============================ -->
   <div class="lightbox" id="lightbox" hidden>

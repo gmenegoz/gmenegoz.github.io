@@ -108,6 +108,21 @@
   });
   palco.addEventListener("pointercancel", function () { x0 = y0 = null; });
 
+  /* ---------- lingua (italiano all'avvio e a ogni ritorno automatico alla home) ---------- */
+  var LINGUE = {
+    it: { altra: "en", bandiera: "img/lingua-en.png", etichetta: "English" },
+    en: { altra: "it", bandiera: "img/lingua-it.png", etichetta: "Italiano" }
+  };
+  function impostaLingua(l) {
+    document.documentElement.lang = l;
+    $("img-lingua").src = LINGUE[l].bandiera;
+    $("btn-lingua").setAttribute("aria-label", LINGUE[l].etichetta);
+  }
+  $("btn-lingua").addEventListener("click", function () {
+    impostaLingua(LINGUE[document.documentElement.lang].altra);
+  });
+  impostaLingua("it");
+
   /* ---------- ritorno automatico alla home ---------- */
   var timer = null;
   function riarma() {
@@ -115,6 +130,7 @@
     if (conf.ritornoHomeSecondi > 0) {
       timer = setTimeout(function () {
         chiudiLightbox();
+        impostaLingua("it");
         if (corrente >= 0 || location.hash) home();
       }, conf.ritornoHomeSecondi * 1000);
     }

@@ -137,3 +137,28 @@ button:focus, a:focus { outline: none; }   /* niente riquadro di focus sul chios
   font-size: 24px;
   color: rgba(255, 255, 255, 0.6);
 }
+
+/* ---------------- lingua: si vede solo il testo della lingua attiva ---------------- */
+html[lang="it"] .en,
+html[lang="en"] .it { display: none !important; }
+
+/* bandiera in alto a sinistra, in tutte le pagine (sotto il lightbox) */
+.lingua {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 15;
+  padding: 18px;               /* area di tocco ≈ 108×84 */
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.lingua img {
+  display: block;
+  width: 72px;
+  height: 48px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  transition: transform 0.12s;
+}
+.lingua:active img { transform: scale(0.92); }

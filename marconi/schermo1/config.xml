@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  config.xml per la Mostra Marconi (MIRS) - Samsung QB24C-T, Tizen 7.0 (TEP)
+  Regole d'oro:
+   - package: ESATTAMENTE 10 caratteri alfanumerici
+   - application id = <package>.<NomeApp>
+   - <name> SENZA spazi e identico a <widgetname> in sssp_config.xml e al nome del .wgt
+   - nella cartella src/ metti SOLO i file dell'app (niente .vscode, README, ecc.)
+-->
+<widget xmlns="http://www.w3.org/ns/widgets"
+        xmlns:tizen="http://tizen.org/ns/widgets"
+        id="http://mirs.museo/marconi"
+        version="1.0.0"
+        viewmodes="fullscreen">
+
+    <tizen:application id="MIRSTest01.Schermo1" package="MIRSTest01" required_version="3.0"/>
+    <tizen:profile name="tv-samsung"/>
+
+    <name>Schermo1</name>
+    <author email="info@example.org">MIRS</author>
+    <content src="index.html"/>
+    <icon src="icon.png"/>
+
+    <!-- L'app è completamente offline: nessun <access origin>, nessuna privilege internet. -->
+    <feature name="http://tizen.org/feature/screen.size.all"/>
+
+    <tizen:setting screen-orientation="landscape"
+                   context-menu="disable"
+                   background-support="disable"
+                   encryption="disable"
+                   install-location="auto"
+                   hwkey-event="enable"/>
+</widget>

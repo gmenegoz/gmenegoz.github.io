@@ -1,0 +1,214 @@
+/* =====================================================================
+   Layout verticale di home e approfondimento, sullo stile dello
+   schermo 2 (misure in px sul palco 1080×1920).
+   ===================================================================== */
+
+:root { --fondo-home: #3a3835; }   /* grigio scuro preso dalla foto della home */
+
+h1 {
+  margin: 0;
+  font-family: var(--font-titolo);
+  font-weight: 400;
+  line-height: 1.2;
+}
+p { margin: 0; }
+
+/* ------------------------------- home ------------------------------- */
+.p-home { background: var(--fondo-home); }
+.foto-home {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1080px;
+  height: 1170px;
+}
+.foto-home img { display: block; width: 100%; height: 100%; }
+/* la foto sfuma nel fondo negli ultimi 340 px */
+.foto-home::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 340px;
+  background: linear-gradient(rgba(58, 56, 53, 0), var(--fondo-home));
+}
+
+.p-home .riquadro {
+  position: absolute;
+  left: 60px;
+  right: 60px;
+  top: 920px;
+  padding: 34px 44px 38px;
+  background: rgba(205, 205, 205, 0.72);
+}
+.p-home .riquadro h1 { font-size: 56px; line-height: 1.1; margin-bottom: 18px; }
+.p-home .riquadro p { font-size: 32px; line-height: 40px; }
+
+.p-home .menu {
+  position: absolute;
+  left: 100px;
+  right: 100px;
+  bottom: 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.p-home .voce {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 92px;
+  padding: 0 30px;
+  border-radius: 26px;
+  background: #000;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: var(--font-titolo);
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 1.15;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  transition: transform 0.12s, background 0.12s;
+}
+.p-home .voce:active { transform: scale(0.97); background: #333; }
+
+/* -------------------------- approfondimento -------------------------- */
+.p-approfondimento .velo {
+  position: absolute;
+  inset: 0;
+  background: rgba(232, 232, 232, 0.8);
+}
+
+.riquadro-testo {
+  position: absolute;
+  left: 60px;
+  right: 60px;
+  top: 84px;               /* lascia libero l'angolo della bandiera della lingua */
+  padding: 44px 56px 48px;
+  background: rgba(255, 255, 255, 0.55);
+}
+.riquadro-testo h1 { font-size: 48px; margin-bottom: 24px; }
+#testo { font-size: 30px; line-height: 37px; }
+
+/* galleria */
+.galleria {
+  position: absolute;
+  left: 130px;
+  top: 920px;
+  width: 820px;
+  height: 600px;
+}
+.galleria .cornice {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.galleria img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+  animation: compare 0.3s ease both;
+}
+.gal-contatore {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 14px;
+  text-align: center;
+  font-family: var(--font-titolo);
+  font-size: 24px;
+  color: rgba(0, 0, 0, 0.55);
+}
+/* didascalia dell'immagine corrente, sotto il contatore */
+.gal-didascalia {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 56px;
+  padding: 14px 22px;
+  background: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  font-family: var(--font-titolo);
+  font-size: 24px;
+  line-height: 30px;
+  animation: compare 0.3s ease both;
+}
+.gal-didascalia:empty { display: none; }
+
+/* frecce sottili della galleria, come nello schermo 2 */
+.freccia {
+  position: absolute;
+  top: 1145px;
+  width: 100px;            /* area di tocco */
+  height: 150px;
+  padding: 25px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.freccia svg {
+  display: block;
+  width: 50px;
+  height: 100px;
+  fill: none;
+  stroke: #111;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.12s;
+}
+.freccia:active svg { transform: scale(0.88); }
+.freccia-prec { left: 20px; }
+.freccia-succ { right: 20px; }
+
+/* barra in basso: approfondimento precedente · home · successivo */
+.barra {
+  position: absolute;
+  left: 40px;
+  right: 40px;
+  bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pulsante {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 300px;
+  height: 72px;
+  padding: 0 24px;
+  justify-content: center;
+  border: 0;
+  border-radius: 36px;
+  background: rgba(0, 0, 0, 0.72);
+  color: #fff;
+  font-family: var(--font-titolo);
+  font-weight: 600;
+  font-size: 26px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 0.12s, background 0.12s;
+}
+.pulsante-home { min-width: 200px; }
+.pulsante:active { transform: scale(0.96); background: #000; }
+.pulsante .segno { font-size: 40px; line-height: 1; margin-top: -6px; }
+.pulsante svg {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

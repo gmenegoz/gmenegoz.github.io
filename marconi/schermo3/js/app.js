@@ -25,6 +25,25 @@
   window.addEventListener("resize", scala);
   scala();
 
+  /* ---------- lingua (italiano all'avvio e a ogni ritorno automatico alla home) ----------
+     I campi con _en in contenuti.js sono la versione inglese; se mancano si usa l'italiano. */
+  var lingua = "it";
+  var LINGUE = {
+    it: { altra: "en", bandiera: "img/lingua-en.png", etichetta: "English" },
+    en: { altra: "it", bandiera: "img/lingua-it.png", etichetta: "Italiano" }
+  };
+  function tr(o, campo) {
+    var en = o[campo + "_en"];
+    return lingua === "en" && en != null ? en : o[campo];
+  }
+  function impostaLingua(l) {
+    lingua = l;
+    document.documentElement.lang = l;
+    $("img-lingua").src = LINGUE[l].bandiera;
+    $("btn-lingua").setAttribute("aria-label", LINGUE[l].etichetta);
+    aggiornaTesti();
+  }
+
   /* ---------- viste ---------- */
   function mostra(id) {
     chiudiLightbox();
@@ -38,21 +57,27 @@
   function daHash() { mostra(location.hash.replace(/^#\/?/, "")); }
   window.addEventListener("hashchange", daHash);
   function tornaHome() { vai(""); }
+
+  // dopo il cambio di lingua: riscrive la didascalia aperta senza cambiare immagine
+  function aggiornaTesti() {
+    if (inGallery) mostraInGalleria(galPos);
+    if (!lb.hidden) mostraInLightbox(lbPos);
+  }
   $("btn-home").addEventListener("click", tornaHome);
 
   /* ---------- didascalia: titolo in grassetto, fonte, testo ---------- */
   function scriviDidascalia(el, voce) {
     el.innerHTML = "";
     var parti = [
-      ["strong", "", voce.titolo],
-      ["span", "fonte", voce.fonte ? "(" + voce.fonte + ")" : ""],
-      ["span", "testo", voce.testo]
+      ["strong", "", tr(voce, "titolo")],
+      ["span", "fonte", tr(voce, "fonte") ? "(" + tr(voce, "fonte") + ")" : ""],
+      ["span", "testo", tr(voce, "testo")]
     ];
     parti.forEach(function (p) {
       if (!p[2]) return;
       var e = document.createElement(p[0]);
       if (p[1]) e.className = p[1];
-      e.textContent = p[2];
+      e.innerHTML = p[2];            // HTML: permette il corsivo (<em>)
       el.appendChild(e);
     });
   }
@@ -73,7 +98,7 @@
     var voce = lista[galPos];
     galImg = rinnova(galImg);
     galImg.src = voce.src;
-    galImg.alt = voce.titolo;
+    galImg.alt = tr(voce, "titolo");
     galDid = rinnova(galDid);
     scriviDidascalia(galDid, voce);
     $("gal-contatore").textContent = (galPos + 1) + " / " + lista.length;
@@ -98,7 +123,7 @@
     var voce = lista[lbPos];
     lbImg.style.width = lbImg.style.height = "";
     lbImg.src = voce.src;
-    lbImg.alt = voce.titolo;
+    lbImg.alt = tr(voce, "titolo");
     scriviDidascalia($("lb-didascalia"), voce);
     $("lb-contatore").textContent = (lbPos + 1) + " / " + lista.length;
   }
@@ -159,6 +184,7 @@
     if (conf.ritornoHomeSecondi > 0) {
       timer = setTimeout(function () {
         chiudiLightbox();
+        impostaLingua("it");
         if (inGallery || location.hash) tornaHome();
       }, conf.ritornoHomeSecondi * 1000);
     }
@@ -186,6 +212,8 @@
     if (e.key === "Escape" || e.key === "Home") tornaHome();
   });
 
+  $("btn-lingua").addEventListener("click", function () { impostaLingua(LINGUE[lingua].altra); });
+  impostaLingua("it");
   daHash();
   riarma();
 })();

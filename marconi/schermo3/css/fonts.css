@@ -1,42 +1,63 @@
 /* =====================================================================
    FONT – unico file da modificare per cambiare i caratteri.
-   Per usare i font dei grafici: copiare i .woff2 in fonts/, aggiornare
-   i @font-face qui sotto e i nomi in --font-titolo / --font-testo.
    ===================================================================== */
 
-/* Titoli e pulsanti: Source Sans 3 (SIL OFL), in attesa del Frutiger dei grafici */
+/* Titoli e pulsanti: Humanities 777 */
 @font-face {
   font-family: "Titolo";
-  src: url("../fonts/source-sans-3-latin-wght-normal.woff2") format("woff2");
-  font-weight: 200 900;
+  src: url("../fonts/hum777n.woff2") format("woff2");
+  font-weight: 200 500;
   font-style: normal;
   font-display: block;
 }
+@font-face {
+  font-family: "Titolo";
+  src: url("../fonts/hum777b.woff2") format("woff2");
+  font-weight: 600 900;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "Titolo";
+  src: url("../fonts/hum777i.woff2") format("woff2");
+  font-weight: 200 500;
+  font-style: italic;
+  font-display: block;
+}
 
-/* Testo: TeX Gyre Pagella (GUST Font License), clone di Palatino */
+@font-face {
+  font-family: "Titolo";
+  src: url("../fonts/Humanist\ 777\ Bold\ Italic.woff2") format("woff2");
+  font-weight: 600 900;
+  font-style: italic;
+  font-display: block;
+}
+
+/* Testo: Minion Pro */
 @font-face {
   font-family: "Testo";
-  src: url("../fonts/texgyrepagella-regular.woff2") format("woff2");
+  src: url("../fonts/MinionPro-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: block;
 }
 @font-face {
   font-family: "Testo";
-  src: url("../fonts/texgyrepagella-bold.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: block;
-}
-@font-face {
-  font-family: "Testo";
-  src: url("../fonts/texgyrepagella-italic.woff2") format("woff2");
+  src: url("../fonts/Minion\ Pro\ Italic.woff2") format("woff2");
   font-weight: 400;
   font-style: italic;
   font-display: block;
 }
 
+@font-face {
+  font-family: "Testo";
+  src: url("../fonts/Minion\ Pro\ Bold.woff2") format("woff2");
+  font-weight: 600 900;
+  font-style: normal;
+  font-display: block;
+}
+
 :root {
-  --font-titolo: "Titolo", "Segoe UI", "Frutiger", sans-serif;
-  --font-testo: "Testo", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  --font-titolo: "Titolo", sans-serif;
+  --font-testo: "Testo", serif;
 }

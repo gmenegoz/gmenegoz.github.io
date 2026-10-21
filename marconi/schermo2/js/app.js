@@ -31,6 +31,25 @@
   window.addEventListener("resize", scala);
   scala();
 
+  /* ---------- lingua (italiano all'avvio e a ogni ritorno automatico alla home) ----------
+     I campi con _en in contenuti.js sono la versione inglese; se mancano si usa l'italiano. */
+  var lingua = "it";
+  var LINGUE = {
+    it: { altra: "en", bandiera: "img/lingua-en.png", etichetta: "English" },
+    en: { altra: "it", bandiera: "img/lingua-it.png", etichetta: "Italiano" }
+  };
+  function tr(o, campo) {
+    var en = o[campo + "_en"];
+    return lingua === "en" && en != null ? en : o[campo];
+  }
+  function impostaLingua(l) {
+    lingua = l;
+    document.documentElement.lang = l;
+    $("img-lingua").src = LINGUE[l].bandiera;
+    $("btn-lingua").setAttribute("aria-label", LINGUE[l].etichetta);
+    aggiornaTesti();
+  }
+
   /* ---------- viste ---------- */
   function mostra(id) {
     var i = indice(id);
@@ -41,9 +60,7 @@
       home.hidden = false;
       return;
     }
-    riempi(dati[i]);
-    $("nome-prec").textContent = dati[mod(i - 1, N)].nome;
-    $("nome-succ").textContent = dati[mod(i + 1, N)].nome;
+    riempi(dati[i], 0);
     home.hidden = true;
     // riavvia l'animazione di comparsa anche passando da un approfondimento all'altro
     pagina.hidden = true;
@@ -51,11 +68,20 @@
     pagina.hidden = false;
   }
 
-  function riempi(a) {
-    $("titolo").textContent = a.titolo;
-    $("data").textContent = a.data;
-    $("testo").innerHTML = a.testo;
-    mostraInGalleria(0);
+  // scrive la pagina nella lingua attiva; k = immagine della galleria da mostrare
+  function riempi(a, k) {
+    $("titolo").innerHTML = tr(a, "titolo");
+    $("data").innerHTML = tr(a, "data");
+    $("testo").innerHTML = tr(a, "testo");
+    $("nome-prec").innerHTML = tr(dati[mod(corrente - 1, N)], "nome");
+    $("nome-succ").innerHTML = tr(dati[mod(corrente + 1, N)], "nome");
+    mostraInGalleria(k);
+  }
+
+  // dopo il cambio di lingua: riscrive la pagina aperta senza cambiare immagine
+  function aggiornaTesti() {
+    if (corrente >= 0) riempi(dati[corrente], galPos);
+    if (!lb.hidden) mostraInLightbox(lbPos);
   }
 
   function vai(id) { location.hash = id ? "#/" + id : ""; }
@@ -83,9 +109,12 @@
     // nuovo elemento a ogni cambio, così riparte l'animazione di comparsa
     var nuova = galImg.cloneNode(false);
     nuova.src = lista[galPos].src;
-    nuova.alt = testoSemplice(lista[galPos].didascalia);
+    nuova.alt = testoSemplice(tr(lista[galPos], "didascalia"));
     galImg.parentNode.replaceChild(nuova, galImg);
     galImg = nuova;
+    var did = $("gal-didascalia"), nuovaDid = did.cloneNode(false);
+    nuovaDid.innerHTML = tr(lista[galPos], "didascalia") || "";
+    did.parentNode.replaceChild(nuovaDid, did);
     var multipla = lista.length > 1;
     $("gal-prec").hidden = $("gal-succ").hidden = !multipla;
     galConta.textContent = multipla ? (galPos + 1) + " / " + lista.length : "";
@@ -116,8 +145,8 @@
     lbPos = mod(k, lista.length);
     lbImg.style.width = lbImg.style.height = "";
     lbImg.src = lista[lbPos].src;
-    lbImg.alt = testoSemplice(lista[lbPos].didascalia);
-    $("lb-didascalia").innerHTML = lista[lbPos].didascalia || "";
+    lbImg.alt = testoSemplice(tr(lista[lbPos], "didascalia"));
+    $("lb-didascalia").innerHTML = tr(lista[lbPos], "didascalia") || "";
     $("lb-contatore").textContent = lista.length > 1 ? (lbPos + 1) + " / " + lista.length : "";
   }
   function apriLightbox(k) {
@@ -179,6 +208,7 @@
     if (conf.ritornoHomeSecondi > 0) {
       timer = setTimeout(function () {
         chiudiLightbox();
+        impostaLingua("it");
         if (corrente >= 0 || location.hash) tornaHome();
       }, conf.ritornoHomeSecondi * 1000);
     }
@@ -204,6 +234,8 @@
     if (e.key === "Escape" || e.key === "Home") tornaHome();
   });
 
+  $("btn-lingua").addEventListener("click", function () { impostaLingua(LINGUE[lingua].altra); });
+  impostaLingua("it");
   daHash();
   riarma();
 })();

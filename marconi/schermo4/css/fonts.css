@@ -1,0 +1,56 @@
+/* =====================================================================
+   FONT – unico file da modificare per cambiare i caratteri.
+   ===================================================================== */
+
+/* Titoli e pulsanti: Humanities 777 */
+@font-face {
+  font-family: "Titolo";
+  src: url("../fonts/hum777n.woff2") format("woff2");
+  font-weight: 200 500;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "Titolo";
+  src: url("../fonts/hum777b.woff2") format("woff2");
+  font-weight: 600 900;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Titolo";
+  src: url("../fonts/hum777i.woff2") format("woff2");
+  font-weight: 200 500;
+  font-style: italic;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Titolo";
+  src: url("../fonts/Humanist\ 777\ Bold\ Italic.woff2") format("woff2");
+  font-weight: 600 900;
+  font-style: italic;
+  font-display: block;
+}
+
+/* Testo: Minion Pro */
+@font-face {
+  font-family: "Testo";
+  src: url("../fonts/MinionPro-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "Testo";
+  src: url("../fonts/Minion\ Pro\ Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: block;
+}
+
+:root {
+  --font-titolo: "Titolo", sans-serif;
+  --font-testo: "Testo", serif;
+}

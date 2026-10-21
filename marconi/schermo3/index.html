@@ -15,10 +15,12 @@
   <!-- ============================ HOME ============================ -->
   <section class="vista-trasparente" id="home">
     <div class="riquadro">
-      <h1>La Fama internazionale</h1>
-      <p>L’immagine di Marconi va oltre l’ambito scientifico. Innumerevoli sono le riviste e i quotidiani che gli dedicano la copertina aumentandone la popolarità. Fra i tanti spiccano “L’illustrazione italiana”, “La Domenica del Corriere”, “Time”, “Le Petit Journal”, “Success”, “Le Magazine” e molte altre.</p>
+      <h1 class="it">La fama internazionale</h1>
+      <h1 class="en">International Fame</h1>
+      <p class="it">L’immagine di Marconi va oltre l’ambito scientifico. Innumerevoli sono le riviste e i quotidiani che gli dedicano la copertina aumentandone la popolarità. Fra i tanti spiccano “L’Illustrazione italiana”, “La Domenica del Corriere”, “Time”, “Le Petit Journal”, “Success”, “Le Magazine” e molte altre.</p>
+      <p class="en">Marconi’s image extends well beyond the scientific sphere. Countless magazines and newspapers featured him on their covers, further boosting his popularity. Notable examples include <i>L’Illustrazione Italiana</i>, <i>La Domenica del Corriere</i>, <i>Time</i>, <i>Le Petit Journal</i>, <i>Success</i>, <i>Le Magazine</i>, and many others.</p>
     </div>
-    <a class="vai" href="#/gallery">Vai alla gallery</a>
+    <a class="vai" href="#/gallery"><span class="it">Vai alla gallery</span><span class="en">Go to the gallery</span></a>
   </section>
 
   <!-- ===================== GALLERY (riempita da app.js con contenuti.js) ===================== -->
@@ -41,6 +43,11 @@
       Home
     </button>
   </section>
+
+  <!-- ============ lingua: la bandiera mostra la lingua in cui si passa ============ -->
+  <button class="lingua" id="btn-lingua" type="button" aria-label="English">
+    <img id="img-lingua" src="img/lingua-en.png" alt="">
+  </button>
 
   <!-- ============================ IMMAGINE INGRANDITA ============================ -->
   <div class="lightbox" id="lightbox" hidden>
